@@ -38,6 +38,7 @@ OUTPUT_SPEC = Path("openapi.json")
 
 
 def main() -> None:
+    """Generate the openai.json and do checks."""
     generated_openapi_schema = generate_openapi()
     schemas_are_equal = schemas_match(generated_schema=generated_openapi_schema)
     write_openapi_to_disk(openapi_schema=generated_openapi_schema)
@@ -73,10 +74,12 @@ def generate_openapi() -> dict:
 
 
 def write_openapi_to_disk(openapi_schema: dict) -> None:
+    """Write openai.json to disk."""
     OUTPUT_SPEC.write_text(json.dumps(openapi_schema, indent=2), encoding="utf-8")
 
 
 def schemas_match(generated_schema: dict) -> bool:
+    """Check if existing schema mathces with generated schema."""
     if not OUTPUT_SPEC.exists():
         return False
     existing_schema = json.loads(OUTPUT_SPEC.read_text(encoding="utf-8"))

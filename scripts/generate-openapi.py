@@ -1,4 +1,5 @@
 # pylint: disable=invalid-name
+"""Module to generate oasdiff."""
 
 import argparse
 import json
@@ -27,6 +28,7 @@ class Diff:
     after: Union[str, dict, list, None]
 
     def __str__(self) -> str:
+        """Print class object in string form."""
         before_str = "MISSING" if self.before is None else json.dumps(self.before, indent=2)
         after_str = "MISSING" if self.after is None else json.dumps(self.after, indent=2)
         return f"******** Diff at: {self.path}\nBEFORE: {before_str}\nAFTER: {after_str}"
@@ -42,6 +44,7 @@ class Args(NamedTuple):
 
 
 def main() -> None:
+    """Generate the openai.json and do checks."""
     args = parse_args()
 
     if args.command == "generate":

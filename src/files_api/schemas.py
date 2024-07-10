@@ -34,7 +34,7 @@ class FileMetadata(BaseModel):
 
 
 class GetFilesQueryParams(BaseModel):
-    """Queryparam"""
+    """Queryparam."""
 
     page_size: int = Field(
         DEFAULT_GET_FILES_PAGE_SIZE,
@@ -46,6 +46,7 @@ class GetFilesQueryParams(BaseModel):
 
     @model_validator(mode="after")
     def check_page_token(self) -> Self:
+        """Check the page token."""
         if self.page_token:
             get_files_query_params: dict = self.model_dump(exclude_unset=True)
             page_size_set = "page_size" in get_files_query_params.keys()

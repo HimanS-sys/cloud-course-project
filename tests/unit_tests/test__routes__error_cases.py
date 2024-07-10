@@ -9,23 +9,27 @@ from tests.consts import TEST_BUCKET_NAME
 
 
 def test_get_non_exixtant_file(client: TestClient):
+    """Test getting non existing file."""
     response = client.get("/files/nonexistantfile.txt")
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.json() == {"detail": "File not found"}
 
 
 def test_head_non_exixtant_file(client: TestClient):
+    """Test getting head of non existing file."""
     response = client.head("/files/nonexistantfile.txt")
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_delete_non_exixtant_file(client: TestClient):
+    """Test deleting non existing file."""
     response = client.delete("/files/nonexistantfile.txt")
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.json() == {"detail": "File not found"}
 
 
 def test_get_files_invaled_page(client: TestClient):
+    """Test getting file with invalid page."""
     response = client.get("/files?page_size=-1")
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
@@ -34,6 +38,7 @@ def test_get_files_invaled_page(client: TestClient):
 
 
 def test_validation_mutually_exclusive_parameters(client: TestClient):
+    """Test validation of mutually exclusive parameters."""
     # Sending both page_token and directory should raise a 422 error
     response = client.get("/files?page_size=10&page_token=some_token&directory=not_default")
     assert response.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
@@ -58,6 +63,7 @@ def test_validation_page_size_greater_than_one(client: TestClient):
 
 
 def test_unforseen_500(client: TestClient):
+    """Test 500 internal server error."""
     # delete the s3 bucket and all objects inside
     s3 = boto3.resource("s3")
     bucket = s3.Bucket(TEST_BUCKET_NAME)

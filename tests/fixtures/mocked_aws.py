@@ -1,4 +1,4 @@
-""" Fixture containing set up and tear down for aws testing."""
+"""Fixture containing set up and tear down for aws testing."""
 
 import os
 
@@ -11,6 +11,7 @@ from tests.consts import TEST_BUCKET_NAME
 
 
 def point_away_from_aws():
+    """Mock the tests with dummy credentials."""
     os.environ[" AWS_ACCESS_KEY_ID"] = "testing"
     os.environ["AWS_SECRET_ACCESS_KEY"] = "testing"
     os.environ["AWS_SECURITY_TOKEN"] = "testing"
@@ -20,6 +21,7 @@ def point_away_from_aws():
 
 @pytest.fixture(scope="function")
 def mocked_aws():
+    """AWS testing setup and teardown."""
     with mock_aws():
         # make sure we are not interacting with aws
         point_away_from_aws()

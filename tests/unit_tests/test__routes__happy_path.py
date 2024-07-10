@@ -10,6 +10,7 @@ TEST_FILE_CONTENT_TYPE = "text/plain"
 
 
 def test_upload_file(client: TestClient):
+    """Test the upload on main.py."""
     # create a file
     test_file_path = "some/nested/file.txt"
     test_file_content = b"some content"
@@ -45,6 +46,7 @@ def test_upload_file(client: TestClient):
 
 
 def test_list_files_with_pagination(client: TestClient):
+    """Test the listing of files with pagination in main.py."""
     for i in range(13):
         client.put(f"/files/file{i}.txt", files={"file": (f"file{i}.txt", TEST_FILE_CONTENT, TEST_FILE_CONTENT_TYPE)})
     response = client.get("/files?page_size=10")
@@ -55,6 +57,7 @@ def test_list_files_with_pagination(client: TestClient):
 
 
 def test_get_file_metadata(client: TestClient):
+    """Test the fetching of file metadata on main.py."""
     client.put(f"/files/{TEST_FILE_PATH}", files={"file": (TEST_FILE_PATH, TEST_FILE_CONTENT, TEST_FILE_CONTENT_TYPE)})
 
     response = client.head(f"/files/{TEST_FILE_PATH}")
@@ -66,6 +69,7 @@ def test_get_file_metadata(client: TestClient):
 
 
 def test_get_file(client: TestClient):
+    """Test thefetch file on main.py."""
     client.put(f"/files/{TEST_FILE_PATH}", files={"file": (TEST_FILE_PATH, TEST_FILE_CONTENT, TEST_FILE_CONTENT_TYPE)})
 
     response = client.get(f"/files/{TEST_FILE_PATH}")
@@ -74,6 +78,7 @@ def test_get_file(client: TestClient):
 
 
 def test_delete_file(client: TestClient):
+    """Test the delete file on main.py."""
     # Upload a file
     client.put(
         f"/files/{TEST_FILE_PATH}",

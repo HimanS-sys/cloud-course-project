@@ -1,4 +1,4 @@
-"""Fixture for FastAPI test client. """
+"""Fixture for FastAPI test client."""
 
 import pytest
 from fastapi.testclient import TestClient
@@ -10,6 +10,7 @@ from tests.consts import TEST_BUCKET_NAME
 
 @pytest.fixture
 def client(mocked_aws) -> TestClient:  # pylint: disable=unused-argument
+    """Fixture for client."""
     settings = Settings(s3_bucket_name=TEST_BUCKET_NAME)
     app = create_app(settings=settings)
     with TestClient(app) as client:
