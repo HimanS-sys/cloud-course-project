@@ -1,8 +1,10 @@
 """Functions for reading objects from an S3 bucket--the "R" in CRUD."""
 
 from typing import Optional
+
 import boto3
-from botocore.exceptions import NoCredentialsError, ClientError
+from botocore.exceptions import ClientError
+
 try:
     from mypy_boto3_s3 import S3Client
     from mypy_boto3_s3.type_defs import (
@@ -33,6 +35,7 @@ def object_exists_in_s3(bucket_name: str, object_key: str, s3_client: Optional["
         print("\n\nException: {e}\n\n")
         return False
 
+
 def fetch_s3_object(
     bucket_name: str,
     object_key: str,
@@ -48,7 +51,7 @@ def fetch_s3_object(
     :return: Metadata of the object.
     """
     s3_client = s3_client or boto3.client("s3")
-    object_metadata = s3_client.get_object(Bucket = bucket_name, Key = object_key)
+    object_metadata = s3_client.get_object(Bucket=bucket_name, Key=object_key)
     return object_metadata
 
 
