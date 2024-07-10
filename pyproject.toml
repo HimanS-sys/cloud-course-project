@@ -9,7 +9,7 @@ authors = [{ name = "<your name>", email = "some-email@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.7"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ['importlib-metadata; python_version<"3.8"', "boto3", "fastapi", "pydantic-settings"]
 classifiers = ["Programming Language :: Python :: 3"]
 keywords = ["one", "two"]
 
@@ -22,7 +22,10 @@ version = { file = "version.txt" }
 
 # optional dependencies can be installed with square brackets, e.g. `pip install my-package[test,static-code-qa]`
 [project.optional-dependencies]
+api = ["uvicorn", "moto[server]"]
 test = ["pytest", "pytest-cov"]
+stubs = ["boto3-stubs[s3]"]
+notebooks = ["jupyterlab", "ipykernel", "rich"]
 release = ["build", "twine"]
 static-code-qa = [
     "pre-commit",
@@ -39,7 +42,7 @@ static-code-qa = [
 # - automatically apply formatting
 # - show enhanced autocompletion for stubs libraries
 # See .vscode/settings.json to see how VS Code is configured to use these tools
-dev = ["cloud-course-project[test,release,static-code-qa]"]
+dev = ["cloud-course-project[test,release,static-code-qa,notebooks,stubs, api]"]
 
 [build-system]
 # Minimum requirements for the build system to execute.
