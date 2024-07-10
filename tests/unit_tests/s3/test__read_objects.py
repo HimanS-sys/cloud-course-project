@@ -12,6 +12,7 @@ from tests.consts import TEST_BUCKET_NAME
 
 # pylint: disable=unused-argument
 def test__object_exists_in_s3(mocked_aws: None):
+    """Assert object exists in S3."""
     s3_client = boto3.client("s3")
     s3_client.put_object(Bucket=TEST_BUCKET_NAME, Key="test.txt", Body="Testing ...")
     assert object_exists_in_s3(bucket_name=TEST_BUCKET_NAME, object_key="test.txt") is True
