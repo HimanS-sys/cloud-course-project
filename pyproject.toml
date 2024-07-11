@@ -14,6 +14,7 @@ dependencies = [
     "boto3",
     "fastapi",
     "pydantic-settings",
+    "moto[server]",
 ]
 classifiers = ["Programming Language :: Python :: 3"]
 keywords = ["one", "two"]
@@ -27,7 +28,7 @@ version = { file = "version.txt" }
 
 # optional dependencies can be installed with square brackets, e.g. `pip install my-package[test,static-code-qa]`
 [project.optional-dependencies]
-api = ["uvicorn", "moto[server]"]
+api = ["uvicorn"]
 test = ["pytest", "pytest-cov"]
 stubs = ["boto3-stubs[s3]"]
 notebooks = ["jupyterlab", "ipykernel", "rich"]

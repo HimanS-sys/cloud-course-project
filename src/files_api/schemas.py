@@ -4,7 +4,6 @@ from datetime import datetime
 from typing import (
     List,
     Optional,
-    Self,
 )
 
 from pydantic import (
@@ -45,7 +44,7 @@ class GetFilesQueryParams(BaseModel):
     page_token: Optional[str] = None
 
     @model_validator(mode="after")
-    def check_page_token(self) -> Self:
+    def check_page_token(self) -> "GetFilesQueryParams":
         """Check the page token."""
         if self.page_token:
             get_files_query_params: dict = self.model_dump(exclude_unset=True)
